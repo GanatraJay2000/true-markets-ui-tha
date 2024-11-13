@@ -89,4 +89,5 @@ A real-time market data feed application that displays live market data in an in
 - **Lightweight**: Minimizes the impact on the app's overall performance.
 - **Good developer experience**: Enhances productivity with a friendly API.
 
-> [!NOTE] > **Note on Next.js 15 Hydration Warning**: If you encounter a hydration warning when running the project in Next.js 15, this may be due to browser extensions interfering with the rendered HTML. Try running the app in incognito mode to verify if the warning persists. This approach can help ensure that extensions are not causing the mismatch between server and client-side rendering.
+> [!NOTE] 
+> **Note on Next.js 15 Hydration Warning**: If you encounter a hydration warning when running the project in Next.js 15, this may be due to browser extensions interfering with the rendered HTML. Try running the app in incognito mode to verify if the warning persists. This approach can help ensure that extensions are not causing the mismatch between server and client-side rendering.
