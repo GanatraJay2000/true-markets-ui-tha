@@ -8,7 +8,7 @@ A real-time market data feed application that displays live market data in an in
 
 - **Next.js 15 (App Router)**
 - **TanStack Table v8**
-- **ShadcN UI**
+- **shadcn/ui**
 - **Tailwind CSS**
 - **TypeScript**
 - **Zod**
@@ -82,7 +82,7 @@ A real-time market data feed application that displays live market data in an in
 - **Type-safe**: Ensures data safety with TypeScript integration.
 - **Headless UI approach**: Provides flexibility in UI design.
 
-### Why ShadcN UI?
+### Why shadcn/ui?
 
 - **Accessible components**: Ensures inclusivity and compliance with accessibility standards.
 - **Customizable**: Easily tailored to project requirements.
