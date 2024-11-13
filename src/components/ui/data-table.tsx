@@ -24,10 +24,7 @@ import {
 } from "@/components/ui/table";
 import { DataTableToolbar } from "../DataTable/Toolbar";
 import { DataTablePagination } from "../DataTable/Pagination";
-import {
-  initialDesktopVisibility,
-  initialMobileVisibility,
-} from "@/lib/constants";
+import { initialDesktopVisibility } from "@/lib/constants";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -40,9 +37,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-    window.innerWidth < 1024
-      ? initialMobileVisibility
-      : initialDesktopVisibility
+    initialDesktopVisibility
   );
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
