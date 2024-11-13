@@ -70,3 +70,23 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: hsl(240 10% 3.9%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(240, 10%, 21%);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(240 10% 28%);
+}
