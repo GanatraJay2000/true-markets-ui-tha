@@ -33,7 +33,6 @@ export function DataTableFacetedFilter<TData, TValue>({
 }: DataTableFacetedFilterProps<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();
   const { tickers, currentTickers, setCurrentTickers } = useSocket();
-  console.log(currentTickers);
   return (
     <Popover>
       <PopoverTrigger asChild>
