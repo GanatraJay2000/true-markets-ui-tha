@@ -25,6 +25,15 @@ export function DataTableViewOptions<TData>({
   const [columnVisibility, setColumnVisibility] = useState<
     Record<string, boolean>
   >({});
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     // Initialize column visibility based on screen size
@@ -51,35 +60,45 @@ export function DataTableViewOptions<TData>({
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="ml-auto h-8 flex  ">
-          <Settings2 />
-          View
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px] ">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
-        <DropdownMenuSeparator className="" />
-        {table
-          .getAllColumns()
-          .filter(
-            (column) =>
-              typeof column.accessorFn !== "undefined" && column.getCanHide()
-          )
-          .map((column) => (
-            <DropdownMenuCheckboxItem
-              key={column.id}
-              className="capitalize"
-              checked={columnVisibility[column.id]}
-              onCheckedChange={(value) =>
-                handleVisibilityChange(column.id, !!value)
-              }
-            >
-              {snakeToTitle(column.id)}
-            </DropdownMenuCheckboxItem>
-          ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="lg:flex items-center lg:space-x-4">
+      <span className="hidden lg:block">{currentTime.toUTCString()}</span>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className="ml-auto h-8 flex  border-neutral-700"
+          >
+            <Settings2 />
+            View
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          align="end"
+          className="w-[150px] border-neutral-700"
+        >
+          <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+          <DropdownMenuSeparator className="border-neutral-700" />
+          {table
+            .getAllColumns()
+            .filter(
+              (column) =>
+                typeof column.accessorFn !== "undefined" && column.getCanHide()
+            )
+            .map((column) => (
+              <DropdownMenuCheckboxItem
+                key={column.id}
+                className="capitalize"
+                checked={columnVisibility[column.id]}
+                onCheckedChange={(value) =>
+                  handleVisibilityChange(column.id, !!value)
+                }
+              >
+                {snakeToTitle(column.id)}
+              </DropdownMenuCheckboxItem>
+            ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }

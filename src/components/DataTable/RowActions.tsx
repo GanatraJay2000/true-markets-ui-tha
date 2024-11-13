@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { taskSchema } from "./schema";
+import { useSocket } from "@/context/WS";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -21,7 +22,8 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const ticker = taskSchema.parse(row.original);
-  console.log(ticker);
+  const { setCurrentTickers, currentTickers } = useSocket();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,7 +36,15 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Delete</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            const newTickers = new Set(currentTickers);
+            newTickers.delete(ticker.product_id!);
+            setCurrentTickers(newTickers);
+          }}
+        >
+          Unsubscribe
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

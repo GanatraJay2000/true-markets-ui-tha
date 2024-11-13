@@ -6,6 +6,7 @@ import { Task } from "./schema";
 import { DataTableColumnHeader } from "./ColumnHeader";
 import { cn } from "@/lib/utils";
 import { DataTableRowActions } from "./RowActions";
+import { Triangle } from "lucide-react";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -14,7 +15,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Product Id" />
     ),
     cell: ({ row }) => (
-      <div className=" text-xs sm:text-sm  font-thin">
+      <div className=" text-xs sm:text-sm text-neutral-100 font-thin">
         {row.getValue("product_id")}
       </div>
     ),
@@ -27,7 +28,14 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex space-x-2 text-xs sm:text-sm  font-thin ">
+        <div className="flex items-center space-x-1 text-xs sm:text-sm text-neutral-400 font-thin ">
+          <Triangle
+            className={cn("size-2 stroke-0", {
+              "transform rotate-180": !row?.original?.higher,
+              "fill-green-500": row?.original?.higher,
+              "fill-red-500": !row?.original?.higher,
+            })}
+          />
           <span
             className={cn("max-w-[500px] truncate font-medium", {
               "text-green-500": row?.original?.higher,
@@ -47,7 +55,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Best Bid Price" />
     ),
     cell: ({ row }) => (
-      <div className=" text-xs sm:text-sm  font-thin">
+      <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
         {row.getValue("best_bid")}
       </div>
     ),
@@ -58,7 +66,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Best Bid Size" />
     ),
     cell: ({ row }) => (
-      <div className=" text-xs sm:text-sm  font-thin">
+      <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
         {row.getValue("best_bid_size")}
       </div>
     ),
@@ -69,7 +77,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Best Ask Price" />
     ),
     cell: ({ row }) => (
-      <div className=" text-xs sm:text-sm  font-thin">
+      <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
         {row.getValue("best_ask")}
       </div>
     ),
@@ -80,7 +88,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Best Ask Size" />
     ),
     cell: ({ row }) => (
-      <div className=" text-xs sm:text-sm  font-thin">
+      <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
         {row.getValue("best_ask_size")}
       </div>
     ),
@@ -92,7 +100,9 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Last Trade Size" />
     ),
     cell: ({ row }) => (
-      <div className=" font-thin">{row.getValue("last_size")}</div>
+      <div className="text-neutral-400 font-thin">
+        {row.getValue("last_size")}
+      </div>
     ),
   },
   {
@@ -101,7 +111,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Last Trade Time" />
     ),
     cell: ({ row }) => (
-      <div className=" text-xs sm:text-sm  font-thin">
+      <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
         {typeof row.getValue("time") === "string"
           ? (row.getValue("time") as string).split("T")[1].replace("Z", "")
           : ""}
