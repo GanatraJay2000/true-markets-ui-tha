@@ -2,13 +2,13 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Task } from "./schema";
+import { Ticker } from "./schema";
 import { DataTableColumnHeader } from "./ColumnHeader";
 import { cn } from "@/lib/utils";
 import { DataTableRowActions } from "./RowActions";
 import { Triangle } from "lucide-react";
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<Ticker>[] = [
   {
     accessorKey: "product_id",
     header: ({ column }) => (

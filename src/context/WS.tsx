@@ -1,6 +1,6 @@
 "use client";
 
-import { Task } from "@/components/DataTable/schema";
+import { Ticker } from "@/components/DataTable/schema";
 import { PRD_IDS } from "@/lib/constants";
 import React, {
   createContext,
@@ -15,7 +15,7 @@ type ContextType = {
   currentTickers: Set<string>;
   setCurrentTickers: (tickers: Set<string>) => void;
   tickers: string[];
-  tickerData: Record<string, Task>;
+  tickerData: Record<string, Ticker>;
   filtered?: boolean;
 };
 
@@ -28,7 +28,7 @@ export const WSProvider = ({ children }: { children: ReactNode }) => {
   const [tickerData, setTickerData] = useState<ContextType["tickerData"]>({});
   const [filtered, setFiltered] = useState<ContextType["filtered"]>(false);
 
-  const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket<Task>(
+  const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket<Ticker>(
     process.env.NEXT_PUBLIC_WS_URL ?? ""
   );
 
@@ -75,7 +75,7 @@ export const WSProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (lastJsonMessage && lastJsonMessage["type"] === "ticker") {
-      const latest: Task = { ...lastJsonMessage };
+      const latest: Ticker = { ...lastJsonMessage };
       setTickerData((prev: ContextType["tickerData"]) => {
         if (prev[latest.product_id])
           latest.higher = prev[latest.product_id].price < latest.price;

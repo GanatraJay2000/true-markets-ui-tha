@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { taskSchema } from "./schema";
+import { tickerSchema } from "./schema";
 import { useSocket } from "@/context/WS";
 
 interface DataTableRowActionsProps<TData> {
@@ -21,7 +21,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const ticker = taskSchema.parse(row.original);
+  const ticker = tickerSchema.parse(row.original);
   const { setCurrentTickers, currentTickers } = useSocket();
 
   return (

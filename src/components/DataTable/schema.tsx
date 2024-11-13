@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const taskSchema = z.object({
+export const tickerSchema = z.object({
   product_id: z.string(),
   best_bid: z.string(),
   best_bid_size: z.string(),
@@ -13,4 +13,4 @@ export const taskSchema = z.object({
   type: z.string().default("ticker"),
 });
 
-export type Task = z.infer<typeof taskSchema>;
+export type Ticker = z.infer<typeof tickerSchema>;

@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TrueX Market Data Feed - Frontend Take-Home Assignment
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+A real-time market data feed application that displays live market data in an interactive table. The project is built with a focus on performance, user experience, and scalability.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technical Decisions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js 15 (App Router)**
+- **TanStack Table v8**
+- **ShadcN UI**
+- **Tailwind CSS**
+- **TypeScript**
+- **Zod**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Minimalistic and to the point**: Prioritized a clean and straightforward design for ease of use and optimal user experience.
 
-## Learn More
+## Architecture
 
-To learn more about Next.js, take a look at the following resources:
+### Data Flow Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Unidirectional data flow**: Simplifies state management and debugging.
+- **WebSocket context → Data Table → Cell Components**: Maintains a consistent data flow for real-time updates.
+- **Type-safe with Zod schema validation**: Ensures the integrity and reliability of incoming WebSocket messages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Real-time Updates
 
-## Deploy on Vercel
+- **Price change indicators**: Visual cues (green/red) that show price changes based on previous values.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Core Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Real-time price updates**: Reflects live data with minimal latency.
+- **Configurable column visibility**: Users can show/hide columns based on preference.
+- **Responsive design (mobile-first)**: Optimized for mobile view.
+- **Sort functionality**: Allows sorting by columns.
+- **Visual price change indicators**: Highlights changes in data with color cues.
+- **Type-safe WebSocket messages**: Validated with Zod for reliable data processing.
+
+## Setup & Development
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/GanatraJay2000/true-markets-ui-tha.git
+   cd truex-market-data-feed
+   ```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Add environment variables**: Create a .env.local file in the root directory and add the following:
+   ```bash
+   NEXT_PUBLIC_WS_URL=wss://ws-feed.exchange.coinbase.com
+   ```
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+5. **Open in browser**: Navigate to http://localhost:3000 / respective port
+
+## Future Improvements
+
+- **Add data persistence**: Store state to retain user preferences and data across sessions.
+- **Implement error boundaries**: Improve resilience and user experience during failures.
+- **Add unit tests**: Ensure code reliability and prevent regressions.
+- **Implement data throttling**: Manage high-frequency updates efficiently to avoid overloading the UI.
+
+## Architecture Decisions
+
+### Why Context for WebSocket?
+
+- **Single source of truth**: Simplifies state management across the app.
+- **Efficient resource management**: Reuses a single WebSocket connection.
+- **Easy state sharing**: Shares data seamlessly across components.
+- **Clean component architecture**: Keeps components decoupled and maintainable.
+
+### Why TanStack Table?
+
+- **Built-in sorting/filtering**: Reduces the need for custom implementations.
+- **Virtual scrolling ready**: Supports efficient handling of large data sets.
+- **Type-safe**: Ensures data safety with TypeScript integration.
+- **Headless UI approach**: Provides flexibility in UI design.
+
+### Why ShadcN UI?
+
+- **Accessible components**: Ensures inclusivity and compliance with accessibility standards.
+- **Customizable**: Easily tailored to project requirements.
+- **Lightweight**: Minimizes the impact on the app's overall performance.
+- **Good developer experience**: Enhances productivity with a friendly API.
+
+> [!NOTE] > **Note on Next.js 15 Hydration Warning**: If you encounter a hydration warning when running the project in Next.js 15, this may be due to browser extensions interfering with the rendered HTML. Try running the app in incognito mode to verify if the warning persists. This approach can help ensure that extensions are not causing the mismatch between server and client-side rendering.
