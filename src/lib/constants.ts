@@ -11,6 +11,12 @@ export const initialMobileVisibility = {
   time: false,
 };
 
+export const initialTabletVisibility = {
+  best_ask_size: false,
+  best_bid_size: false,
+  last_size: false,
+};
+
 export const initialDesktopVisibility = {
   higher: false,
 };

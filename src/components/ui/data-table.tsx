@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ColumnDef,
@@ -24,7 +24,11 @@ import {
 } from "@/components/ui/table";
 import { DataTableToolbar } from "../DataTable/Toolbar";
 import { DataTablePagination } from "../DataTable/Pagination";
-import { initialDesktopVisibility } from "@/lib/constants";
+import {
+  initialDesktopVisibility,
+  initialMobileVisibility,
+  initialTabletVisibility,
+} from "@/lib/constants";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -62,6 +66,17 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+
+  useEffect(() => {
+    if (typeof window == "undefined") return;
+    const initialState =
+      window.innerWidth < 890
+        ? initialMobileVisibility
+        : window.innerWidth < 1200
+        ? initialTabletVisibility
+        : initialDesktopVisibility;
+    setColumnVisibility(initialState);
+  }, []);
 
   return (
     <div className="space-y-4">
