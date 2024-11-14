@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
@@ -67,6 +68,26 @@ export function DataTableViewOptions<TData>({
                 {snakeToTitle(column.id)}
               </DropdownMenuCheckboxItem>
             ))}
+          {table.getAllColumns().length >
+            1 +
+              table.getAllColumns().filter((col) => col.getIsVisible())
+                .length && (
+            <>
+              <DropdownMenuSeparator className="border-neutral-700" />
+              <DropdownMenuItem
+                onSelect={() => {
+                  table
+                    .getAllColumns()
+                    .filter(
+                      (col) => col.id !== "higher" && col.toggleVisibility(true)
+                    );
+                }}
+                className="justify-center text-center"
+              >
+                Reset
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
