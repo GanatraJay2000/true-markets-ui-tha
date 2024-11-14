@@ -29,7 +29,7 @@ export const WSProvider = ({ children }: { children: ReactNode }) => {
   const [filtered, setFiltered] = useState<ContextType["filtered"]>(false);
 
   const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket<Ticker>(
-    process.env.NEXT_PUBLIC_WS_URL ?? ""
+    "wss://ws-feed.exchange.coinbase.com"
   );
 
   useEffect(() => {
