@@ -63,6 +63,7 @@ export function DataTableViewOptions<TData>({
                 key={column.id}
                 className="capitalize"
                 checked={column.getIsVisible()}
+                onSelect={(e) => e.preventDefault()}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
                 {snakeToTitle(column.id)}
