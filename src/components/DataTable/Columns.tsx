@@ -110,13 +110,22 @@ export const columns: ColumnDef<Ticker>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Last Trade Time" />
     ),
-    cell: ({ row }) => (
-      <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
-        {typeof row.getValue("time") === "string"
-          ? (row.getValue("time") as string).split("T")[1].replace("Z", "")
-          : ""}
-      </div>
-    ),
+    cell: ({ row }) => {
+      const timeString = row.getValue("time") as string;
+      const formattedTime = new Date(timeString).toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      });
+      const milliseconds = timeString.split(".")[1]?.slice(0, 6) || "000000";
+
+      return (
+        <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
+          {`${formattedTime}.${milliseconds}`}
+        </div>
+      );
+    },
   },
   {
     id: "higher",

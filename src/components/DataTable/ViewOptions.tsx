@@ -23,7 +23,7 @@ export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
   const [currentTime, setCurrentTime] = useState(new Date());
-
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -32,10 +32,24 @@ export function DataTableViewOptions<TData>({
     return () => clearInterval(timer);
   }, []);
 
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",
+    hour12: false,
+  };
+
   return (
     <div className="lg:flex items-center lg:space-x-4">
-      <span className="hidden lg:block">{currentTime.toUTCString()}</span>
-      <DropdownMenu>
+      <span className="hidden lg:block">
+        {currentTime.toLocaleString("en-US", options)}
+      </span>
+      <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"
