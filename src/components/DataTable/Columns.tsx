@@ -42,7 +42,7 @@ export const columns: ColumnDef<Ticker>[] = [
               "text-red-500": !row?.original?.higher,
             })}
           >
-            {row.getValue("price")}
+            ${row.getValue("price")}
           </span>
         </div>
       );
@@ -56,7 +56,7 @@ export const columns: ColumnDef<Ticker>[] = [
     ),
     cell: ({ row }) => (
       <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
-        {row.getValue("best_bid")}
+        ${row.getValue("best_bid")}
       </div>
     ),
   },
@@ -78,7 +78,7 @@ export const columns: ColumnDef<Ticker>[] = [
     ),
     cell: ({ row }) => (
       <div className=" text-xs sm:text-sm text-neutral-400 font-thin">
-        {row.getValue("best_ask")}
+        ${row.getValue("best_ask")}
       </div>
     ),
   },
